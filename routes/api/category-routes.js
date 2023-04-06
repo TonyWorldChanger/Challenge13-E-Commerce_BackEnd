@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Category, Product } = require('../models');
+const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
@@ -12,10 +12,11 @@ router.get('/', (req, res) => {
     }
   })
     .then(categoryData => {
-      if(!categoryData) {
+      if(categoryData) {
         res.status(200).json(categoryData);
         return;
       }
+      res.status(200).json([]);
     })
       .catch(err => {
         console.log(err);
@@ -35,10 +36,11 @@ router.get('/:id', (req, res) => {
     },
   })
     .then((categoryData) => {
-      if (!categoryData) {
+      if(categoryData) {
         res.status(200).json(categoryData);
         return;
       }
+      res.status(200).json([]);
     })
       .catch((err) => {
         console.log(err);
@@ -70,10 +72,11 @@ router.put('/:id', (req, res) => {
     },
   })
     .then((categoryData) => {
-      if (!categoryData) {
+      if(categoryData) {
         res.status(200).json(categoryData);
         return;
       }
+      res.status(200).json([]);
     })
 });
 
@@ -85,10 +88,11 @@ router.delete('/:id', (req, res) => {
     },
   })
     .then((categoryData) => {
-      if (!categoryData) {
+      if(categoryData) {
         res.status(200).json(categoryData);
         return;
       }
+      res.status(200).json([]);
     })
       .catch((err) => {
         console.log(err);
