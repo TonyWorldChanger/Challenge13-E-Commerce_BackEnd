@@ -20,11 +20,12 @@ router.get('/', (req, res) => {
       },
     ],
   })
-    .then((categoryData) =>{
-      if (!categoryData) {
-        res.status(200).json(categoryData);
-        return;
-      }
+  .then((categoryData) => {
+    if(categoryData) {
+      res.status(200).json(categoryData);
+      return;
+    }
+    res.status(200).json([]);
     })
       .catch((err) => {
         console.log(err);
@@ -52,11 +53,12 @@ router.get('/:id', (req, res) => {
       },
     ],
   })
-    .then((categoryData) => {
-      if (!categoryData) {
-        res.status(200).json(categoryData);
-        return;
-      }
+  .then((categoryData) => {
+    if(categoryData) {
+      res.status(200).json(categoryData);
+      return;
+    }
+    res.status(200).json([]);
     })
       .catch((err) => {
         console.log(err);

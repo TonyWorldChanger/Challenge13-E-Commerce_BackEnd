@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const { Tag, Product, ProductTag, Category } = require('../../models');
 
 // The `/api/tags` endpoint
 
@@ -7,23 +7,29 @@ router.get('/', (req, res) => {
   // find all tags
   // be sure to include its associated Product data
   Tag.findAll({
-    attributes: ["id", "product_name", "price", "stock", "category_id"],
+    attributes: ["id", "tag_name",],
     includes: [
       {
+        model: Category,
+        attributes: ["id", "category_name"],
+      },
+      {
         model: Product,
-        attributes: ["id", "tag_name"],
+        attributes: ["id", "product_name"],
       },
     ],
   })
-    .then((categoryData) => {
-      if (!categoryData) {
+   .then((categoryData) => {
+      if(categoryData) {
         res.status(200).json(categoryData);
         return;
       }
+      res.status(200).json([]);
     })
-      .catch((err) => {
-        console.log(err);
-      });
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.get('/:id', (req, res) => {
@@ -33,18 +39,24 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: [
+    attributes: ["id", "tag_name",],
+    includes: [
+      {
+        model: Category,
+        attributes: ["id", "category_name"],
+      },
       {
         model: Product,
-        attributes: ["id", "product_name", "price", "stock", "category_id"],
+        attributes: ["id", "product_name"],
       },
     ],
   })
     .then((categoryData) => {
-      if (!categoryData) {
+      if(categoryData) {
         res.status(200).json(categoryData);
         return;
       }
+      res.status(200).json([]);
     })
       .catch((err) => {
         console.log(err);
@@ -58,8 +70,11 @@ router.post('/', (req, res) => {
     tag_name: req.body.tag_name,
   })
     .then((categoryData) => {
-      res.status(200).json(categoryData);
-      return;
+      if(categoryData) {
+        res.status(200).json(categoryData);
+        return;
+      }
+      res.status(200).json([]);
     })
       .catch((err) => {
         console.log(err);
@@ -79,11 +94,16 @@ router.put('/:id', (req, res) => {
   }
   )
     .then((categoryData) => {
-      if (!categoryData) {
+      if(categoryData) {
         res.status(200).json(categoryData);
-      return;
+        return;
       }
+      res.status(200).json([]);
       
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
     });
   
 
@@ -97,10 +117,11 @@ router.delete('/:id', (req, res) => {
     },
   })
     .then((categoryData) => {
-      if (!categoryData) {
+      if(categoryData) {
         res.status(200).json(categoryData);
         return;
       }
+      res.status(200).json([]);
     })
       .catch((err) => {
         console.log(err);
