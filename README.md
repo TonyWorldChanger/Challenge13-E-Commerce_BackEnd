@@ -36,7 +36,7 @@ You will need to run the schema from the data base file. You will need to log in
 ![Challenge13](assets/Category-POST-IMAGE.PNG)
 
 ### Video Link
-
+https://watch.screencastify.com/v/n9G7yJV6atVazt0lgxmj
 
 
 ## Credits
