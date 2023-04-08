@@ -26,6 +26,20 @@ THEN the data for each of these routes is displayed in a formatted JSON
 WHEN I test API POST, PUT, and DELETE routes in Insomnia
 THEN I am able to successfully create, update, and delete data in my database
 ```
+## Usage
+[Github Page Address](https://github.com/TonyWorldChanger/Challenge13-E-Commerce_BackEnd)
+
+You will need to run the schema from the data base file. You will need to log into your mysql and source the schema. Next, use the command "npm run seed" to seed the data. After you seed the data, you will need to use the command "npm start", this will allow you to connect to the server. Open Insomnia and have some fun!!!!
+
+### ScreenShot of Challenge
+![Challenge13](assets/Category-GET-IMAGE.PNG)
+![Challenge13](assets/Category-POST-IMAGE.PNG)
+
+### Video Link
+
+
 
 ## Credits
 Kevin YouTube Channel
+Cameron Verver TA
+Sean - Sub Instructor
